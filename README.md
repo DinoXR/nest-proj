@@ -92,12 +92,12 @@ make build     # Run locally
 ### 1 First Register As User
 ![App Screenshot](https://i.imgur.com/Z1eQCkY.png)
 
-Once create you will receive a email to confirm the email and that will approve your account
+Once created you will receive an OTP to the registered email to confirm the email and that will approve your account
 
 ### 2 Confirming the account
 ![App Screenshot](https://i.imgur.com/zqEoWzi.png)
 
-Once you confirm your account you can Login
+Once you confirm your account by entering the OTP that came to your email,  you can Login
 
 ### 3 Login 
 ![App Screenshot](https://i.imgur.com/mmLJ9mk.png)
