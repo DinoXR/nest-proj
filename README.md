@@ -8,8 +8,8 @@ The Nest JS E-Commerce Preferences API is designed to efficiently handle user pr
 ![App Screenshot](https://i.imgur.com/ReyWTMP.png)
 
 ## Overview
-
 This repository contains two projects: `nestjs-proj` and `nestjs-proj-auth`. The former is a NestJS application, while the latter focuses on authentication using AWS Cognito. Additionally, a separate Terraform project, `nest-proj-terraform`, is provided to set up the necessary AWS Cognito User Pool.
+This project utilizes two API gateways. One is responsible for handling authentication through Cognito and Lambda functions, while the other manages user-related functionalities and preferences.
 
 ## Getting Started
 
@@ -85,6 +85,13 @@ Use the Makefile to deploy or run locally:
 make deploy  # Deploy using serverless framework
 make build     # Run locally
 ```
+
+
+## Testing with the deployed development environment on AWS.
+Authentication APIs can be accessed through the API Gateway URL for Auth.
+https://gyeene0qw4.execute-api.ap-south-1.amazonaws.com/dev
+User and preferences APIs can be accessed through the API Gateway URL.
+https://0us2iyb4pi.execute-api.ap-south-1.amazonaws.com/dev
 
 
 ## Demo
