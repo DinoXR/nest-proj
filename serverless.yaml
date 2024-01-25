@@ -1,0 +1,50 @@
+service: e-com-backend
+
+useDotenv: true
+
+plugins:
+  - serverless-offline
+  - serverless-jetpack
+
+provider:
+  name: aws
+  region: ap-south-1
+  runtime: nodejs18.x
+  environment:
+    MONGO_URI: ${env:MONGO_URI}
+    COGNITO_USER_POOL_ID: ${env:COGNITO_USER_POOL_ID}
+    COGNITO_CLIENT_ID: ${env:COGNITO_CLIENT_ID}
+    COGNITO_CLIENT_SECRET: ${env:COGNITO_CLIENT_SECRET}
+    REGION: ${env:REGION}
+    API_URL: ${env:API_URL}
+
+functions:
+  main:
+    handler: dist/serverless.handler
+    events:
+      - http:
+          authorizer:
+            arn: ${env:COGNITO_ARN}
+          path: /users
+          method: GET
+      - http:
+          authorizer:
+            arn: ${env:COGNITO_ARN}
+          path: /users
+          method: PATCH
+      - http:
+          authorizer:
+            arn: ${env:COGNITO_ARN}
+          path: /users/preferences
+          method: ANY
+      - http:
+          path: /users
+          method: POST
+      - http:
+          path: /preferences
+          method: ANY
+      - http:
+          authorizer:
+            arn: ${env:COGNITO_ARN}
+          path: /{proxy+}
+          method: ANY
