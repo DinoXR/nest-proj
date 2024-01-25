@@ -1,0 +1,321 @@
+openapi: 3.0.0
+info:
+  title: E Commerce Store - OpenAPI 3.0
+  description: API documentation for E Commerce Application
+  contact:
+    email: nissanka.se@gmail.com
+  version: 1.0.11
+servers:
+  - url: https://gyeene0qw4.execute-api.ap-south-1.amazonaws.com/dev
+  - url: https://0us2iyb4pi.execute-api.ap-south-1.amazonaws.com/dev
+components:
+  securitySchemes:
+    noauthAuth:
+      type: http
+      scheme: noauth
+    apikeyAuth:
+      type: http
+      scheme: apikey
+tags:
+  - name: auth
+  - name: preferences
+  - name: user
+paths:
+  /auth/register:
+    post:
+      tags:
+        - auth
+      summary: New user registration
+      operationId: registerUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: janedoe@gmail.com
+                password: Samantha@6213
+                fullName: Jane Doe
+                dob: "2002-04-29"
+      security:
+        - noauthAuth: []
+      responses:
+        "201":
+          description: Successful operation
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: Success
+                message: Registration successful
+        "401":
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                message: User already exists
+                error: Unauthorized
+                statusCode: 401
+  /auth/login:
+    post:
+      tags:
+        - auth
+      summary: User Login
+      operationId: loginUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: janedoe@gmail.com
+                password: Samantha@621
+      responses:
+        "201":
+          description: Successful operation
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: Success
+                data:
+                  refreshToken: >-
+                    xxxxxxxx
+                  idToken: >-
+                    xxxxxxxx
+                  expiresIn: 3600
+                message: Successful operation
+        "401":
+          description: Incorrect user name or password
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                message: Incorrect username or password.
+                error: Unauthorized
+                statusCode: 401
+  /auth/account:
+    post:
+      tags:
+        - auth
+      summary: User activate the account using otp
+      operationId: activateUserAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: janedoe2@gmail.com
+                code: "197154"
+      responses:
+        "201":
+          description: Successful operation
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: Success
+                message: Account activated successfully
+        "401":
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                example-0:
+                  summary: "401"
+                  value:
+                    message: User cannot be confirmed. Current status is CONFIRMED
+                    error: Unauthorized
+                    statusCode: 401
+                example-1:
+                  summary: Invalid Code
+                  value:
+                    message: Invalid verification code provided, please try again.
+                    error: Unauthorized
+                    statusCode: 401
+  /auth/code:
+    post:
+      tags:
+        - auth
+      summary: Resend OTP Code for user account activation
+      operationId: resendCode
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: jane@gmail.com
+      responses:
+        "201":
+          description: Successful operation
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: Success
+                message: Code resent successfully
+        "401":
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                message: User is already confirmed.
+                error: Unauthorized
+                statusCode: 401
+  /preferences:
+    get:
+      tags:
+        - preferences
+      summary: Get Preferences List
+      responses:
+        "200":
+          description: Successful operation
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: Success
+                message: Preferences fetched successfully
+                data:
+                  - id: 65b15686eaf10871fee37232
+                    name: clothes
+                  - id: 65b157511d7b5e933d3ccfc3
+                    name: music
+  /users/preferences:
+    patch:
+      tags:
+        - user
+      summary: Registered user add a new prefrence
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                preferenceId: 65b15686eaf10871fee37232
+      security:
+        - apikeyAuth: []
+      responses:
+        "200":
+          description: Successful operation
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: Success
+                message: Preferences managed successfully
+        "400":
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: Failed
+                message: Preference already exists
+        "401":
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                message: Unauthorized
+    get:
+      tags:
+        - user
+      summary: User get list of preferences they have added
+      security:
+        - apikeyAuth: []
+      responses:
+        "200":
+          description: Successful operation
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: Success
+                data:
+                  - test
+                message: Preferences fetched successfully
