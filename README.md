@@ -1,6 +1,13 @@
 
 # Nest JS E Commerce API
 
+
+## Testing with the deployed development environment on AWS.
+Authentication APIs can be accessed through the API Gateway URL for Auth.
+https://gyeene0qw4.execute-api.ap-south-1.amazonaws.com/dev
+User and preferences APIs can be accessed through the API Gateway URL.
+https://0us2iyb4pi.execute-api.ap-south-1.amazonaws.com/dev
+
 The Nest JS E-Commerce Preferences API is designed to efficiently handle user preferences, providing functionalities for both addition and deletion operations. This API empowers your E-Commerce platform to seamlessly manage user-specific preferences, enhancing the overall user experience.
 
 ## Screenshots
@@ -85,13 +92,6 @@ Use the Makefile to deploy or run locally:
 make deploy  # Deploy using serverless framework
 make build     # Run locally
 ```
-
-
-## Testing with the deployed development environment on AWS.
-Authentication APIs can be accessed through the API Gateway URL for Auth.
-https://gyeene0qw4.execute-api.ap-south-1.amazonaws.com/dev
-User and preferences APIs can be accessed through the API Gateway URL.
-https://0us2iyb4pi.execute-api.ap-south-1.amazonaws.com/dev
 
 
 ## Demo
