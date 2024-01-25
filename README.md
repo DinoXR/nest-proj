@@ -1,13 +1,5 @@
 
 # Nest JS E Commerce API
-
-
-## Testing with the deployed development environment on AWS.
-Authentication APIs can be accessed through the API Gateway URL for Auth.
-https://gyeene0qw4.execute-api.ap-south-1.amazonaws.com/dev
-User and preferences APIs can be accessed through the API Gateway URL.
-https://0us2iyb4pi.execute-api.ap-south-1.amazonaws.com/dev
-
 The Nest JS E-Commerce Preferences API is designed to efficiently handle user preferences, providing functionalities for both addition and deletion operations. This API empowers your E-Commerce platform to seamlessly manage user-specific preferences, enhancing the overall user experience.
 
 ## Screenshots
@@ -17,6 +9,10 @@ The Nest JS E-Commerce Preferences API is designed to efficiently handle user pr
 ## Overview
 This repository contains two projects: `nestjs-proj` and `nestjs-proj-auth`. The former is a NestJS application, while the latter focuses on authentication using AWS Cognito. Additionally, a separate Terraform project, `nest-proj-terraform`, is provided to set up the necessary AWS Cognito User Pool.
 This project utilizes two API gateways. One is responsible for handling authentication through Cognito and Lambda functions, while the other manages user-related functionalities and preferences.
+
+## Testing with the deployed development environment on AWS.
+Authentication APIs can be accessed through the API Gateway URL for Auth: https://gyeene0qw4.execute-api.ap-south-1.amazonaws.com/dev
+User and preferences APIs can be accessed through the API Gateway URL: https://0us2iyb4pi.execute-api.ap-south-1.amazonaws.com/dev
 
 ## Getting Started
 
